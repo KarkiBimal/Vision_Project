@@ -1,0 +1,119 @@
+<!-- Since we were having almost same code in Home.html and About.html, we want to inherit from layout.html so we dont have to write for both files-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+      <meta charset="utf-8">
+      {% if title %}
+        <title>TTU-Transcript-{{ title }}</title>
+      {% else %}
+        <title>TTU-Transcript</title>
+      {% endif %}
+    </head>
+  <body>
+    <div class="mydiv">
+      <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+          <div class="container">
+            <!-- ROWS -->
+                  <div class="navbar">
+                  <div class="dropdown">
+                  <!-- <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Avaliable Lectures
+                  </div> -->
+                    <button type="button" id="dropdownMenuButton" data-toggle="dropdown">TTU Lectures
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                  <!-- <div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownMenuButton"> -->
+                  <div class="dropdown-menu">
+                    <div class="header">
+                      <h2>Select the classes</h2>
+                    </div>
+                      <div class="dropdown-row">
+                        <div class="dropdown-column">
+                          <h3>Category 1</h3>
+                          <a href="#">MachineLearning</a>
+                          <a href="#">DeepLearning</a>
+                          <a href="#">AssemblyLanguage</a>
+                        </div>
+                        <div class="dropdown-column">
+                          <h3>Category 2</h3>
+                          <a href="#">DataStructures</a>
+                          <a href="#">Algorithms</a>
+                          <a href="#">OperatingSystem</a>
+                        </div>
+                        <div class="dropdown-column">
+                          <h3>Category 3</h3>
+                          <a href="#">DataMining</a>
+                          <a href="#">ComputerArchitecture</a>
+                          <a href="#">ComputerVision</a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button> -->
+
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a id ="abc" class="nav-item nav-link" href="/">Home</a>
+                <a id ="abc" class="nav-item nav-link" href="/About">About</a>
+              </div>
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                {% if current_user.is_authenticated %}
+                <a id ="abc" class="nav-item nav-link" href="/account">Account</a>
+                <a id ="abc" class="nav-item nav-link" href="/logout">Logout</a>
+                {% else %}
+                <a id ="abc" class="nav-item nav-link" href="/login">Login</a>
+                <a id ="abc" class="nav-item nav-link" href="/register">Register</a>
+                {%  endif %}
+              </div>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+          </div>
+        </nav>
+      </header>
+      <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+      <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <!-- <strong>Title</strong> --> {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+        </div>
+      </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    </body>
+
+  </html>

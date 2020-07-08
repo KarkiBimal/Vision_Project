@@ -1,0 +1,121 @@
+body,.mydiv {
+  color: #9DE899;
+  margin-top: 5rem;
+  padding:0;
+  width:100%;
+  margin:0;
+  overflow: hidden;
+  height:100%;
+  color:black;
+  font-weight:bold;
+  animation: myanimation 10s infinite;
+}
+body{
+  background: url("https://lh3.googleusercontent.com/proxy/YU5o0YLrGdSD2i0cgKqy-1pbAVH5vgPE7Cuf2D0RT7WYzzW4n7JgBRJnmCIBnUOI05vwwk3k9G_MJ1jmjSTuKDWSzSYnegs");
+  background-size: 1950px 985px;
+  background-repeat: no-repeat;
+  padding-top: 100px;
+}
+.main{
+  background: url("https://images.pexels.com/photos/34088/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat;
+  /* background-size: 1950px 985px; */
+  background-size: cover;
+}
+.content-section {
+  background: #D4D6C9;
+  padding: 10px 20px 30px 40px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  color:red;
+  margin-bottom: 10px;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+.active, #abc:hover {
+  color: #ED0010;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  color: #3C8E91;
+}
+.bg-steel {
+  background-color:#3C8E91;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #de925f;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ED0010;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+#dropdownMenuButton{
+  background: #0f9296;
+}
+.dropdown #dropdownMenuButton {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 0;
+  background-color: inherit;
+  font: inherit;
+  margin: 10px 10px;
+}
+
+/* makes three equal column */
+.dropdown-column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  background-color: #ccc;
+  height: 250px;
+}
+
+.dropdown-column {
+  float: none;
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  text-align: left;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 100%;
+  left: 0;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@media screen and (max-width: 600px) {
+  .dropdown-column {
+    width: 100%;
+    height: auto;
+  }
