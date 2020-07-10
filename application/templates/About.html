@@ -6,18 +6,23 @@
   <video src="static/Myvideo.mp4"  controls>
   </video>
 </div>
-<div class="trsp">
+<div class="trspt">
   <form method="POST" action=" ">
     {{ form.hidden_tag() }}
     <fieldset>
     <legend >Transcripts</legend>
     <div>
-      {{ form.transcript1}}
-      {{ form.transcript2}}
-      {{ form.transcript3}}
+      <p>Transcript 1 </p>
+      <textarea name="transcript1"  class="trsp"></textarea>
+      <p>Transcript 2 </p>
+      <textarea name="transcript2"  class="trsp"></textarea>
+      <p>Transcript 3 </p>
+      <textarea name="transcript3"  class="trsp"></textarea>
+
+      <button type="submit" class="T-S">Submit</button>
+
     </div>
   </fieldset>
-  {{ form.submit}}
 
   </form>
 
