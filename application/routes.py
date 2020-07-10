@@ -6,9 +6,25 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route('/')   # control this and home page, no need to pass the title
-@app.route('/Home')
+
+@app.route('/Home', methods=['GET', 'POST'])
 def Home():
-    return render_template('Home.html',title='Home') #rendering from home.html file
+    
+    form=LoginForm()
+
+    if form.validate_on_submit():
+        user=User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page=request.args.get('next')
+            flash('Your have successfully logged-in.','success')
+            return redirect(next_page) if next_page else redirect(url_for('Home'))
+
+        else:
+            flash('Login Unsuccessfull. Please check your email and password', 'danger')
+
+
+    return render_template('Home.html',title='Home',form=form) #rendering from home.html file
 
 @app.route('/About', methods=['GET', 'POST'])
 @login_required
