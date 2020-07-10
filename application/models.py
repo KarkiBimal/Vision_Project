@@ -15,3 +15,16 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.date_created}')"
+
+class Transcript(db.Model):
+    id= id=db.Column(db.Integer, primary_key=True)
+    transcript1=db.Column(db.String(20))
+    transcript2=db.Column(db.String(20))
+    transcript3=db.Column(db.String(20))
+    def __repr__(self):
+        return f"Transcript('{self.transcript1}','{self.transcript2}','{self.transcript3}')"
+
+
+    
+
+

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
-from application.forms import RegisterationForm, LoginForm, UpdateAccountForm
-from application.models import User #fixing the circular import error.
+from application.forms import RegisterationForm, LoginForm, UpdateAccountForm, Transcriptform
+from application.models import User, Transcript #fixing the circular import error.
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -10,9 +10,16 @@ from flask_login import login_user, current_user, logout_user, login_required
 def Home():
     return render_template('Home.html',title='Home') #rendering from home.html file
 
-@app.route('/About')
+@app.route('/About', methods=['GET', 'POST'])
+@login_required
 def About():
-    return render_template('About.html', title='About') #connecting another about.html file
+   form=Transcriptform()
+   if form.validate_on_submit(): 
+    transcript=Transcript(transcript1=form.transcript1.data,transcript2=form.transcript2.data,transcript3=form.transcript3.data )
+    db.session.add(transcript)
+    db.session.commit()
+   
+   return render_template('About.html', title='About', form=form) #connecting another about.html file
 
 @app.route('/register', methods=['GET', 'POST'])
 def Register():
@@ -33,7 +40,7 @@ def Register():
 @app.route('/login', methods=['GET', 'POST'])
 def Login():
     if current_user.is_authenticated:
-        return redirect(url_for('Home'))
+        return redirect(url_for('/About'))
     form=LoginForm()
     if form.validate_on_submit():
         user=User.query.filter_by(email=form.email.data).first()
@@ -50,7 +57,6 @@ def Login():
 @app.route('/logout')
 def logout():
     logout_user()
-    flash('You have been logged-out successfully','success')
     return redirect(url_for('Home'))
 
 @app.route('/account', methods=['GET','POST'])
@@ -68,3 +74,4 @@ def account():
         form.email.data=current_user.email
 
     return render_template('account.html', title='Account', form=form )
+

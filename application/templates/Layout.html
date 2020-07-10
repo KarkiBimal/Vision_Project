@@ -26,14 +26,15 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
             <!-- ROWS -->
+            {%  if current_user.is_authenticated %}
                   <div class="navbar">
                   <div class="dropdown">
                   <!-- <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Avaliable Lectures
                   </div> -->
-                    <button type="button" id="dropdownMenuButton" data-toggle="dropdown">TTU Lectures
-                      <i class="fa fa-caret-down"></i>
-                    </button>
+                  <button type="button" id="dropdownMenuButton" data-toggle="dropdown">Lectures
+                    <i class="fa fa-caret-down"></i>
+                  </button>
                   <!-- <div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownMenuButton"> -->
                   <div class="dropdown-menu">
                     <div class="header">
@@ -62,16 +63,34 @@
                   </div>
                 </div>
               </div>
+              {% else %}
+              <div class="navbar">
+                <div class="dropdown">
+                <!-- <div class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Avaliable Lectures
+                </div> -->
+                <a id="abc"   href="/Home">Home</a>
+                </div>
+              </div>
+                           
+
+              {% endif%}
 
             <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button> -->
 
             <div class="collapse navbar-collapse" id="navbarToggle">
+              {%  if current_user.is_authenticated %}
               <div class="navbar-nav mr-auto">
-                <a id ="abc" class="nav-item nav-link" href="/">Home</a>
+                <a id ="abc" class="nav-item nav-link" href="/Home">Home</a>
                 <a id ="abc" class="nav-item nav-link" href="/About">About</a>
               </div>
+              {% else %}
+              <div>
+
+              </div>
+              {% endif %}
               <!-- Navbar Right Side -->
               <div class="navbar-nav">
                 {% if current_user.is_authenticated %}
@@ -104,15 +123,16 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
-            {% block content %}{% endblock %}
-        </div>
+          </div>
         </div>
       </main>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            {% block content %}
+            
+            
+            
+            {% endblock %}
+        
+    
 
     </body>
 

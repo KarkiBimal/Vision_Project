@@ -46,3 +46,9 @@ class UpdateAccountForm(FlaskForm):
             user=User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('That email is taken already')
+
+class Transcriptform(FlaskForm):
+    transcript1=StringField('Transcript1',validators=[Length(min=2, max=20)])
+    transcript2=StringField('Transcript2',validators=[Length(min=2, max=20)])
+    transcript3=StringField('Transcript3',validators=[Length(min=2, max=20)])
+    submit=SubmitField('Submitted')

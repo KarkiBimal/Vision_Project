@@ -1,4 +1,4 @@
-body,.mydiv {
+.mydiv {
   color: #9DE899;
   margin-top: 5rem;
   padding:0;
@@ -10,24 +10,36 @@ body,.mydiv {
   font-weight:bold;
   animation: myanimation 10s infinite;
 }
-body{
-  background: url("https://lh3.googleusercontent.com/proxy/YU5o0YLrGdSD2i0cgKqy-1pbAVH5vgPE7Cuf2D0RT7WYzzW4n7JgBRJnmCIBnUOI05vwwk3k9G_MJ1jmjSTuKDWSzSYnegs");
-  background-size: 1950px 985px;
-  background-repeat: no-repeat;
-  padding-top: 100px;
-}
+
 .main{
-  background: url("https://images.pexels.com/photos/34088/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+ 
   background-repeat: no-repeat;
   /* background-size: 1950px 985px; */
   background-size: cover;
 }
+
+ 
+
+ #vid_f{
+   float: right;
+   margin-top:10%;
+ }
+
+.front_home{
+  color: #fff;
+  text-decoration: none;
+  
+
+}
+  
+
 .content-section {
   background: #D4D6C9;
   padding: 10px 20px 30px 40px;
   border: 1px solid #dddddd;
   border-radius: 5px;
   color:red;
+  margin-top: 10%;
   margin-bottom: 10px;
 }
 
@@ -40,6 +52,9 @@ body{
 
 .account-heading {
   font-size: 2.5rem;
+}
+#abc{
+  color: #fff;
 }
 
 .active, #abc:hover {
@@ -119,3 +134,5 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: auto;
   }
+   
+ 
