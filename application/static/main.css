@@ -35,9 +35,14 @@
   padding: 10px 20px 30px 40px;
   border: 1px solid #dddddd;
   border-radius: 5px;
-  color:red;
+  color:black;
   margin-top: 10%;
   margin-bottom: 10px;
+}
+
+#login_register_form{
+  width:40%;
+  margin-left: 28%;
 }
 
 .account-img {
@@ -55,7 +60,7 @@
 }
 
 .active, #abc:hover {
-  color: #ED0010;
+  color: black;
 }
 
 
@@ -71,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ED0010;
+  color: black;
 }
 
 .site-header .navbar-nav .nav-link.active {

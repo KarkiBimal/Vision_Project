@@ -11,6 +11,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 def Home():
     
     form=LoginForm()
+   
 
     if form.validate_on_submit():
         user=User.query.filter_by(email=form.email.data).first()
@@ -22,11 +23,13 @@ def Home():
 
         else:
             flash('Login Unsuccessfull. Please check your email and password', 'danger')
-
-
     return render_template('Home.html',title='Home',form=form) #rendering from home.html file
 
-@app.route('/About', methods=['GET', 'POST'])
+    
+
+    
+
+@app.route('/Videos', methods=['GET', 'POST'])
 @login_required
 def About():
    form=Transcriptform()
@@ -35,7 +38,7 @@ def About():
     db.session.add(transcript)
     db.session.commit()
    
-   return render_template('About.html', title='About', form=form) #connecting another about.html file
+   return render_template('Videos.html', title='About', form=form) #connecting another about.html file
 
 @app.route('/register', methods=['GET', 'POST'])
 def Register():
@@ -56,7 +59,7 @@ def Register():
 @app.route('/login', methods=['GET', 'POST'])
 def Login():
     if current_user.is_authenticated:
-        return redirect(url_for('/About'))
+        return redirect(url_for('/Videos'))
     form=LoginForm()
     if form.validate_on_submit():
         user=User.query.filter_by(email=form.email.data).first()
