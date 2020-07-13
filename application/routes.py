@@ -1,29 +1,44 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
-from application.forms import RegisterationForm, LoginForm, UpdateAccountForm, Transcriptform
-from application.models import User, Transcript #fixing the circular import error.
+from application.forms import RegisterationForm, LoginForm, UpdateAccountForm, Transcriptform, VideosForm
+from application.models import User, Transcript, Videos #fixing the circular import error.
 from flask_login import login_user, current_user, logout_user, login_required
+from werkzeug.utils import secure_filename
 
 
 @app.route('/')   # control this and home page, no need to pass the title
 
 @app.route('/Home', methods=['GET', 'POST'])
 def Home():
+    if current_user.is_authenticated:
+        form=VideosForm()
+        if request.method == 'POST':
+          f= request.files['file']
+          f.save(secure_filename(f.filename))
+          return 'file uploaded successfully'
+          form=VideosForm()
+        if form.validate_on_submit(): 
+           videof=Videos(path="Videos/"+form.file.data,titile=form.title.data )
+           db.session.add(videof)
+           db.session.commit()      
+      
+        return render_template('Home.html', title='Upload', form=form)
+    else:
     
-    form=LoginForm()
+       form=LoginForm()
    
 
-    if form.validate_on_submit():
-        user=User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page=request.args.get('next')
-            flash('Your have successfully logged-in.','success')
-            return redirect(next_page) if next_page else redirect(url_for('Home'))
+       if form.validate_on_submit():
+            user=User.query.filter_by(email=form.email.data).first()
+            if user and bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user, remember=form.remember.data)
+                next_page=request.args.get('next')
+                flash('Your have successfully logged-in.','success')
+                return redirect(next_page) if next_page else redirect(url_for('Home'))
 
-        else:
-            flash('Login Unsuccessfull. Please check your email and password', 'danger')
-    return render_template('Home.html',title='Home',form=form) #rendering from home.html file
+            else:
+                flash('Login Unsuccessfull. Please check your email and password', 'danger')
+       return render_template('Home.html',title='Home',form=form) #rendering from home.html file
 
     
 
@@ -94,3 +109,11 @@ def account():
 
     return render_template('account.html', title='Account', form=form )
 
+
+
+	
+
+
+		
+if __name__ == '__main__':
+   app.run(debug = True)

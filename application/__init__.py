@@ -9,6 +9,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY']='ed1ff94680a9743cdb0df051afc03b5c00770af70f4d' #hex 22
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATION']=False
+app.config['UPLOAD_FOLDER']
+app.config['MAX_CONTENT_PATH']
+
+
 db=SQLAlchemy(app)
 bcrypt=Bcrypt(app)
 login_manager=LoginManager(app)

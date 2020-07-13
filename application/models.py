@@ -24,6 +24,13 @@ class Transcript(db.Model):
     def __repr__(self):
         return f"Transcript('{self.transcript1}','{self.transcript2}','{self.transcript3}')"
 
+class Videos(db.Model):
+   id= id=db.Column(db.Integer, primary_key=True)
+   title=db.Column(db.String(20))
+   path=db.Column(db.String(200))
+   def __repr__(self):
+        return f"Transcript('{self.path}','{self.titel}')"
+
 
     
 

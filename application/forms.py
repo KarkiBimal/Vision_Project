@@ -52,3 +52,8 @@ class Transcriptform(FlaskForm):
     transcript2=TextField('Transcript2',validators=[Length(min=2, max=2000)])
     transcript3=TextField('Transcript3',validators=[Length(min=2, max=2000)])
     submit=SubmitField('Submitted')
+
+class VideosForm(FlaskForm):
+    title=StringField('title',validators=[Length(min=1,max=20)])
+    path=StringField('path', validators=[Length(min=1,max=200)])
+    submit=SubmitField('Submitted')
