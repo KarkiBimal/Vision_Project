@@ -6,7 +6,7 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER='application\Videos'
+UPLOAD_FOLDER='application\static\Videos'
 
 app.config['SECRET_KEY']='ed1ff94680a9743cdb0df051afc03b5c00770af70f4d' #hex 22
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///db.sqlite3'

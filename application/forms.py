@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextField
 from wtforms.validators import DataRequired, Length, Email , EqualTo, Length, ValidationError
-from application.models import User
+from application.models import User, Transcript, Videos
 
 
 
@@ -14,7 +14,7 @@ class RegisterationForm(FlaskForm):
     submit=SubmitField('Sign Up!')
 
     def validate_username(self, username):
-        user=User.query.filter_by(username=username.data).first()
+        user=User.query.filter_by(Username=username.data).first()
         if user:
             raise ValidationError('That username is taken already')
 
@@ -51,9 +51,8 @@ class Transcriptform(FlaskForm):
     transcript1=TextField('Transcript1',validators=[Length(min=2, max=2000)])
     transcript2=TextField('Transcript2',validators=[Length(min=2, max=2000)])
     transcript3=TextField('Transcript3',validators=[Length(min=2, max=2000)])
-    submit=SubmitField('Submitted')
+    submit=SubmitField('Submit')
 
 class VideosForm(FlaskForm):
-    title=StringField('title',validators=[Length(min=1,max=20)])
-    path=StringField('path', validators=[Length(min=1,max=200)])
-    submit=SubmitField('Submitted')
+    title=StringField('Title',validators=[Length(min=1,max=20)])
+    submit=SubmitField('Submit')

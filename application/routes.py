@@ -4,9 +4,10 @@ from application.forms import RegisterationForm, LoginForm, UpdateAccountForm, T
 from application.models import User, Transcript, Videos #fixing the circular import error.
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.utils import secure_filename
+import os
 
 
-@app.route('/')   # control this and home page, no need to pass the title
+@app.route('/',methods=['GET', 'POST'])   # control this and home page, no need to pass the title
 
 @app.route('/Home', methods=['GET', 'POST'])
 def Home():
@@ -14,15 +15,18 @@ def Home():
         form=VideosForm()
         if request.method == 'POST':
           f= request.files['file']
-          f.save(secure_filename(f.filename))
-          return 'file uploaded successfully'
-          form=VideosForm()
-        if form.validate_on_submit(): 
-           videof=Videos(path="Videos/"+form.file.data,titile=form.title.data )
-           db.session.add(videof)
-           db.session.commit()      
+          filename = secure_filename(f.filename)
+          f.save(os.path.join('application\static\Videos', filename))
+          flash('file uploaded successfully')
+        
+          if form.validate_on_submit(): 
+           if request.method == 'POST':
+            videof=Videos(Title=form.title.data, Path=filename )
+            db.session.add(videof)
+            db.session.commit()     
+           
       
-        return render_template('Home.html', title='Upload', form=form)
+        return render_template('Home.html', title='Upload',form=form)
     else:
     
        form=LoginForm()
@@ -49,9 +53,10 @@ def Home():
 def About():
    form=Transcriptform()
    if form.validate_on_submit(): 
-    transcript=Transcript(transcript1=form.transcript1.data,transcript2=form.transcript2.data,transcript3=form.transcript3.data )
-    db.session.add(transcript)
-    db.session.commit()
+       if request.method == 'POST':
+            transcript=Transcript(Transcript1=form.transcript1.data,Transcript2=form.transcript2.data,Transcript3=form.transcript3.data )
+            db.session.add(transcript)
+            db.session.commit()
    
    return render_template('Videos.html', title='About', form=form) #connecting another about.html file
 
@@ -62,7 +67,7 @@ def Register():
     form=RegisterationForm()
     if form.validate_on_submit(): 
         hashed_pw=bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user=User(username=form.username.data, email=form.email.data, password=hashed_pw)
+        user=User(Username=form.username.data, email=form.email.data, password=hashed_pw)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created. Now, you can login.', 'success')
@@ -74,7 +79,7 @@ def Register():
 @app.route('/login', methods=['GET', 'POST'])
 def Login():
     if current_user.is_authenticated:
-        return redirect(url_for('/Videos'))
+        return redirect(url_for('Home'))
     form=LoginForm()
     if form.validate_on_submit():
         user=User.query.filter_by(email=form.email.data).first()
@@ -98,7 +103,7 @@ def logout():
 def account():
     form=UpdateAccountForm()
     if form.validate_on_submit():
-        current_user.username=form.username.data
+        current_user.Username=form.username.data
         current_user.email=form.email.data
         db.session.commit()
         flash('Your account has been updated successfully', 'success')

@@ -8,28 +8,28 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id=db.Column(db.Integer, primary_key=True)
-    username=db.Column(db.String(30), unique=True, nullable=False)
+    Username=db.Column(db.String(30), unique=True, nullable=False)
     email=db.Column(db.String(60), unique=True, nullable=False)
     password=db.Column(db.String(60), nullable=False)
     date_created=db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"User('{self.username}','{self.email}','{self.date_created}')"
+        return f"User('{self.Username}','{self.email}','{self.date_created}')"
 
 class Transcript(db.Model):
-    id= id=db.Column(db.Integer, primary_key=True)
-    transcript1=db.Column(db.String(20))
-    transcript2=db.Column(db.String(20))
-    transcript3=db.Column(db.String(20))
+    id=db.Column(db.Integer, primary_key=True)
+    Transcript1=db.Column(db.String(20))
+    Transcript2=db.Column(db.String(20))
+    Transcript3=db.Column(db.String(20))
     def __repr__(self):
-        return f"Transcript('{self.transcript1}','{self.transcript2}','{self.transcript3}')"
+        return f"Transcript('{self.Transcript1}','{self.Transcript2}','{self.Transcript3}')"
 
 class Videos(db.Model):
-   id= id=db.Column(db.Integer, primary_key=True)
-   title=db.Column(db.String(20))
-   path=db.Column(db.String(200))
+   id=db.Column(db.Integer, primary_key=True)
+   Path=db.Column(db.String(200))
+   Title=db.Column(db.String(20))
    def __repr__(self):
-        return f"Transcript('{self.path}','{self.titel}')"
+        return f"Videos('{self.Title}','{self.Path}')"
 
 
     

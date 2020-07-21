@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='videos.css') }}">
 <div class="vid">
   
-  <video  controls>
+  <video src="static\Videos\Test.mp4" type="video/mp4" controls>
   </video>
 </div>
 <div class="trspt">
@@ -20,7 +20,8 @@
       <p>Transcript 3 </p>
       <textarea name="transcript3"  class="trsp"></textarea>
 
-      <button type="submit" class="T-S">Submit</button>
+      {{ form.submit(class="T_S")}}
+
 
     </div>
   </fieldset>
