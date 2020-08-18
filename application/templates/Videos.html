@@ -3,12 +3,14 @@
 {%  block content %}
 
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='videos.css') }}">
+<div id="container">
 
-<div>
+
+  <div id="vid_list">
 
  
 
-  <div id="vid_show">
+  <div>
     {% for item in video %}
     <div id="vid_s">
 
@@ -16,7 +18,7 @@
         <script type=text/javascript>
            var path= '{{item.Path}}';
           </script>
-        <button type="button" onclick="vidPlay('{{item.Path}}')">{{ item.Path }}</button>
+        <button type="button" onclick="vidPlay('{{item.Path}}')">{{ item.Title }}</button>
         
      
         
@@ -76,6 +78,6 @@
 
     
 </div>
-
+</div>
 
 {% endblock %}
