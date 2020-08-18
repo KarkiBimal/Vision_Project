@@ -1,12 +1,58 @@
 {% extends "layout.html"  %}
 
 {%  block content %}
+
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='videos.css') }}">
-<div class="vid">
-  
-  <video src="static\Videos\Test.mp4" type="video/mp4" controls>
-  </video>
+
+<div>
+
+ 
+
+  <div id="vid_show">
+    {% for item in video %}
+    <div id="vid_s">
+
+      <form action="/Videos" method="post">
+        <script type=text/javascript>
+           var path= '{{item.Path}}';
+          </script>
+        <button type="button" onclick="vidPlay('{{item.Path}}')">{{ item.Path }}</button>
+        
+     
+        
+    </form>
+      
+    </div>
+    
+    
+    {% endfor  %}
+  </div>
 </div>
+
+
+
+<button  onclick="vidPlay();" >Button</button>
+<div class="vid">
+  <video id="wtf" src='' type="video/mp4" controls>
+  </video>
+   </div>
+
+   <script type=text/javascript>
+    function vidPlay(path){
+      
+      var Path =document.getElementById("wtf")
+      Path.src=path ;
+      
+     
+              
+    }
+  </script>
+ 
+ 
+ 
+
+
+
 <div class="trspt">
   <form method="POST" action=" ">
     {{ form.hidden_tag() }}
@@ -30,5 +76,6 @@
 
     
 </div>
+
 
 {% endblock %}

@@ -11,8 +11,11 @@ import os
 
 @app.route('/Home', methods=['GET', 'POST'])
 def Home():
+   
     if current_user.is_authenticated:
         form=VideosForm()
+        
+
         if request.method == 'POST':
           f= request.files['file']
           filename = secure_filename(f.filename)
@@ -20,13 +23,18 @@ def Home():
           flash('file uploaded successfully')
         
           if form.validate_on_submit(): 
+           
            if request.method == 'POST':
-            videof=Videos(Title=form.title.data, Path=filename )
+            
+            videof=Videos(Title=form.title.data, Path="static\Videos"+'\\'+filename )
             db.session.add(videof)
-            db.session.commit()     
+            db.session.commit()   
+
+        videos=db.session.query(Videos).all()  
+          
            
       
-        return render_template('Home.html', title='Upload',form=form)
+        return render_template('Home.html', title='Upload',form=form,video=videos)
     else:
     
        form=LoginForm()
@@ -52,13 +60,16 @@ def Home():
 @login_required
 def About():
    form=Transcriptform()
+   def play(path):
+       Path=path
+       return render_template('Videos.html', title='About', form=form, path=Path)
    if form.validate_on_submit(): 
        if request.method == 'POST':
             transcript=Transcript(Transcript1=form.transcript1.data,Transcript2=form.transcript2.data,Transcript3=form.transcript3.data )
             db.session.add(transcript)
             db.session.commit()
-   
-   return render_template('Videos.html', title='About', form=form) #connecting another about.html file
+   videos=db.session.query(Videos).all()       
+   return render_template('Videos.html', title='About', form=form, video=videos) #connecting another about.html file
 
 @app.route('/register', methods=['GET', 'POST'])
 def Register():
@@ -109,7 +120,7 @@ def account():
         flash('Your account has been updated successfully', 'success')
         return redirect(url_for('account'))
     elif request.method=='GET':
-        form.username.data=current_user.username
+        form.username.data=current_user.Username
         form.email.data=current_user.email
 
     return render_template('account.html', title='Account', form=form )

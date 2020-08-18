@@ -21,13 +21,36 @@
     </fieldset>
   
     </form>
-    <div id=vid_show>
+</div>
+
 
       
 
+            <div id="vid_show">
+              {% for item in video %}
+              <div id="vid_s">
+
+                
+                <form action="/Videos" method="post">
+                  <button onclick="play({{ item.Path }})">{{ item.Title }}</button>
+              </form>
+                
+              </div>
+              
+              
+              {% endfor  %}
+            </div>
+            
+      
+          
+
+        
 
 
-    </div>
+
+      
+    
+    
 {% else %}
 <div id="container"></div>
 <div id="intro">

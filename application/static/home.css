@@ -22,3 +22,19 @@
     margin-right:2% ;
     
 }
+#vid_show{
+    width:30%;
+    float:right;
+    background-color: bisque;
+    margin-top:6%;
+    margin-right:2%;
+
+}
+#vid_s{
+    margin-top: 5px;
+    padding: 5px;
+
+}
+#vid_s:hover{
+    background-color: antiquewhite;
+}
