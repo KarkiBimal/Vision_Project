@@ -26,7 +26,7 @@ def Home():
            
            if request.method == 'POST':
             
-            videof=Videos(Title=form.title.data, Path="static\Videos"+'\\'+filename )
+            videof=Videos(Title=form.title.data, Path="static\\\\Videos"+'\\\\'+filename )
             db.session.add(videof)
             db.session.commit()   
 
